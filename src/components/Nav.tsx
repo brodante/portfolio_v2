@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { profile } from "@/data/profile";
 import { useI18n } from "@/i18n";
 import {
+  AnchorLink,
   CloseIcon,
+  DocIcon,
   GitHubIcon,
+  LinkIcon,
   LinkedInIcon,
   MenuIcon,
   MoonIcon,
@@ -68,22 +70,31 @@ export function Nav() {
     <>
       <header className="fixed inset-x-0 top-0 z-50 glass border-b border-line">
         <div className="mx-auto flex h-16 max-w-[1280px] items-center justify-between px-5 md:px-10">
-          <Link href="/#top" className="mono text-sm tracking-tight flex items-center gap-1" onClick={() => setOpen(false)}>
+          <AnchorLink id="top" className="mono text-sm tracking-tight flex items-center gap-1" onNavigate={() => setOpen(false)}>
             <span className="text-accent">spsc</span>
             <span className="text-muted">://</span>
             <span className="font-semibold">portfolio</span>
             <span className="cursor-blink text-accent">▍</span>
-          </Link>
+          </AnchorLink>
 
           <nav className="hidden lg:flex items-center gap-6" aria-label="Primary">
             {t.nav.map((l) => (
-              <Link key={l.id} href={`/#${l.id}`} className="mono u-link text-xs uppercase tracking-[0.2em] text-muted hover:text-ink transition-colors">
+              <AnchorLink key={l.id} id={l.id} className="mono u-link text-xs uppercase tracking-[0.2em] text-muted hover:text-ink transition-colors">
                 {l.label}
-              </Link>
+              </AnchorLink>
             ))}
           </nav>
 
           <div className="flex items-center gap-2.5">
+            <a
+              href={profile.resume}
+              target="_blank"
+              rel="noreferrer"
+              className="hidden md:inline-flex h-9 items-center gap-1.5 border border-line px-3 mono text-[10px] uppercase tracking-[0.18em] text-muted transition-colors hover:border-accent hover:text-accent"
+            >
+              <DocIcon className="w-3.5 h-3.5" />
+              {t.contact.resume} ↗
+            </a>
             {/* language switch */}
             <div className="flex border border-line" role="group" aria-label="Language / 言語">
               {langBtn("en", "EN")}
@@ -132,10 +143,10 @@ export function Nav() {
         <div className="absolute inset-0 glass bg-bg/90" />
         <nav className="relative flex h-full flex-col justify-center px-8 pt-16" aria-label="Mobile">
           {t.nav.map((l, i) => (
-            <Link
+            <AnchorLink
               key={l.id}
-              href={`/#${l.id}`}
-              onClick={() => setOpen(false)}
+              id={l.id}
+              onNavigate={() => setOpen(false)}
               className="group flex items-baseline gap-4 border-b border-line py-4 transition-all duration-500"
               style={{
                 transitionDelay: `${i * 45}ms`,
@@ -147,14 +158,20 @@ export function Nav() {
               <span className="display text-3xl group-hover:text-accent transition-colors">
                 {l.label}
               </span>
-            </Link>
+            </AnchorLink>
           ))}
-          <div className="mt-8 flex items-center gap-5 text-muted">
+          <div className="mt-8 flex flex-wrap items-center gap-5 text-muted">
             <a href={profile.github} target="_blank" rel="noreferrer" aria-label="GitHub" className="hover:text-accent transition-colors">
               <GitHubIcon />
             </a>
             <a href={profile.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="hover:text-accent transition-colors">
               <LinkedInIcon />
+            </a>
+            <a href={profile.resume} target="_blank" rel="noreferrer" aria-label="Resume" className="hover:text-accent transition-colors">
+              <DocIcon className="w-5 h-5" />
+            </a>
+            <a href={profile.linktree} target="_blank" rel="noreferrer" aria-label="Linktree" className="hover:text-accent transition-colors">
+              <LinkIcon className="w-5 h-5" />
             </a>
             <span className="mono text-xs break-all">{profile.email}</span>
           </div>

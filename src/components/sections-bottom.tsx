@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useI18n } from "@/i18n";
 import type { ProjectContent, SkillGroupKey } from "@/i18n/types";
 import { Reveal } from "./motion";
@@ -201,8 +202,11 @@ export function ProjectsIndexBody() {
   const { t } = useI18n();
   return (
     <section className="mx-auto max-w-[1280px] px-5 md:px-10 pt-32 md:pt-40 pb-24 md:pb-36">
-      <Reveal>
+      <Reveal className="flex items-center justify-between">
         <p className="mono text-xs md:text-sm text-accent tracking-[0.25em]">~/projects $ ls -la</p>
+        <Link href="/" className="u-link mono text-xs uppercase tracking-[0.2em] text-muted hover:text-accent">
+          {t.indexPage.backHome}
+        </Link>
       </Reveal>
       <Reveal variant="mask" delay={80}>
         <h1 className="display mt-4 text-[clamp(2.8rem,9vw,7.5rem)]">
@@ -226,11 +230,19 @@ export function ProjectsIndexBody() {
 
 export function CaseFile({ slug }: { slug: string }) {
   const { t } = useI18n();
+  const router = useRouter();
   const p = t.projects.find((x) => x.slug === slug);
   if (!p) return null;
   const idx = t.projects.findIndex((x) => x.slug === slug);
-  const next = t.projects[(idx + 1) % t.projects.length];
+  const len = t.projects.length;
+  const next = t.projects[(idx + 1) % len];
+  const prev = t.projects[(idx - 1 + len) % len];
   const cf = t.caseFile;
+
+  const goBack = () => {
+    if (typeof window !== "undefined" && window.history.length > 1) router.back();
+    else router.push("/projects");
+  };
 
   return (
     <article className="mx-auto max-w-[1280px] px-5 md:px-10 pt-28 md:pt-36 pb-24">
@@ -238,12 +250,20 @@ export function CaseFile({ slug }: { slug: string }) {
         <p className="mono text-xs md:text-sm text-muted tracking-[0.18em]">
           <span className="text-accent">~/projects</span> $ open {p.slug}
         </p>
-        <Link
-          href="/projects"
-          className="u-link mono text-xs uppercase tracking-[0.2em] text-muted hover:text-accent"
-        >
-          {cf.all}
-        </Link>
+        <div className="flex items-center gap-5">
+          <button
+            onClick={goBack}
+            className="u-link mono text-xs uppercase tracking-[0.2em] text-muted hover:text-accent"
+          >
+            ← {cf.back}
+          </button>
+          <Link
+            href="/projects"
+            className="u-link mono text-xs uppercase tracking-[0.2em] text-muted hover:text-accent"
+          >
+            {cf.all}
+          </Link>
+        </div>
       </Reveal>
 
       <Reveal variant="fade" className="mt-10">
@@ -347,20 +367,20 @@ export function CaseFile({ slug }: { slug: string }) {
       </div>
 
       <Reveal className="mt-24 md:mt-32">
-        <Link
-          href={`/projects/${next.slug}`}
-          className="row-sweep group flex items-center justify-between border-t-2 border-line-strong py-10 px-2 md:px-4"
-        >
-          <div>
-            <p className="mono text-xs uppercase tracking-[0.25em] text-muted">{cf.next}</p>
-            <p className="display mt-3 text-3xl md:text-6xl group-hover:text-accent transition-colors">
+        <div className="grid md:grid-cols-2 gap-px bg-line border border-line">
+          <Link href={`/projects/${prev.slug}`} className="group bg-bg p-6 md:p-8 transition-colors hover:bg-accent-dim">
+            <p className="mono text-xs uppercase tracking-[0.25em] text-muted">← {cf.prev}</p>
+            <p className="display mt-3 text-2xl md:text-4xl group-hover:text-accent transition-colors">
+              {prev.title}
+            </p>
+          </Link>
+          <Link href={`/projects/${next.slug}`} className="group bg-bg p-6 md:p-8 transition-colors hover:bg-accent-dim md:text-right">
+            <p className="mono text-xs uppercase tracking-[0.25em] text-muted">{cf.next} →</p>
+            <p className="display mt-3 text-2xl md:text-4xl group-hover:text-accent transition-colors">
               {next.title}
             </p>
-          </div>
-          <span className="grid h-14 w-14 md:h-20 md:w-20 shrink-0 place-items-center border border-line text-muted transition-all duration-300 group-hover:border-accent group-hover:bg-accent group-hover:text-accent-ink">
-            <ArrowRight className="w-6 h-6 md:w-8 md:h-8" />
-          </span>
-        </Link>
+          </Link>
+        </div>
       </Reveal>
     </article>
   );

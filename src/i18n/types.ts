@@ -103,9 +103,15 @@ export type Content = {
     phoneHours?: string;
     bottom: string;
     top: string;
+    resume: string;
+    resumeDesc: string;
+    linktreeLabel: string;
+    linktreeDesc: string;
   };
   caseFile: {
     all: string;
+    back: string;
+    prev: string;
     problem: string;
     built: string;
     impact: string;
@@ -116,6 +122,6 @@ export type Content = {
     status: string;
     links: string;
   };
-  indexPage: { title1: string; title2: string; intro: string };
+  indexPage: { title1: string; title2: string; intro: string; backHome: string };
   projects: ProjectContent[];
 };

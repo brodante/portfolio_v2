@@ -184,9 +184,15 @@ export const ja: Content = {
     localTime: "現地時間 —",
     bottom: "designed & built with next.js — テンプレートは傷つけていない",
     top: "トップへ戻る ↑",
+    resume: "履歴書",
+    resumeDesc: "一枚の証明",
+    linktreeLabel: "linktree",
+    linktreeDesc: "ほか全部、ひとつのリンクに",
   },
   caseFile: {
-    all: "← 全ケースファイル",
+    all: "全ケースファイル",
+    back: "戻る",
+    prev: "前のケースファイル",
     problem: "課題",
     built: "作ったもの",
     impact: "成果",
@@ -200,6 +206,7 @@ export const ja: Content = {
   indexPage: {
     title1: "ケース",
     title2: "ファイル",
+    backHome: "← ホーム",
     intro: "5 つの制作、5 つの解く価値のある課題。各行が完全なケースファイルを開く——課題、作ったもの、そして残した成果。",
   },
   projects: [

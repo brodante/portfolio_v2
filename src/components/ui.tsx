@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent, type ReactNode } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { Reveal } from "./motion";
 
 /* ---------------------------------- icons ---------------------------------- */
@@ -218,5 +219,68 @@ export function Chip({ children }: { children: string }) {
     <span className="mono inline-block border border-line px-2.5 py-1 text-[11px] md:text-xs tracking-[0.08em] text-muted uppercase transition-colors duration-300 hover:border-accent hover:text-accent">
       {children}
     </span>
+  );
+}
+
+export const DocIcon = ({ className = "w-4 h-4" }: IconProps) => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+    <path d="M6 2.5h8l4 4v15H6v-19Z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+    <path d="M14 2.5v4h4M9 11h6M9 14.5h6M9 18h4" stroke="currentColor" strokeWidth="1.6" />
+  </svg>
+);
+
+export const LinkIcon = ({ className = "w-4 h-4" }: IconProps) => (
+  <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden="true">
+    <path d="M10 14a4.5 4.5 0 0 0 6.4.4l3-3a4.5 4.5 0 0 0-6.4-6.4l-1.5 1.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    <path d="M14 10a4.5 4.5 0 0 0-6.4-.4l-3 3a4.5 4.5 0 0 0 6.4 6.4l1.5-1.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+  </svg>
+);
+
+/* ------------------------------ anchor link -------------------------------- */
+
+/**
+ * Hash navigation that always works: scrolls natively on the home page and
+ * navigates home first from any sub-page (Next's Link alone does not scroll
+ * when the route doesn't change).
+ */
+export function AnchorLink({
+  id,
+  className = "",
+  children,
+  onNavigate,
+  style,
+}: {
+  id: string;
+  className?: string;
+  children: ReactNode;
+  onNavigate?: () => void;
+  style?: React.CSSProperties;
+}) {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const scroll = () => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+      else window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+    };
+    if (pathname === "/") {
+      window.history.pushState(null, "", `#${id}`);
+      scroll();
+    } else {
+      router.push("/");
+      window.setTimeout(scroll, 120);
+      window.setTimeout(scroll, 450);
+    }
+    onNavigate?.();
+  };
+
+  return (
+    <a href={`/#${id}`} onClick={handleClick} className={className} style={style}>
+      {children}
+    </a>
   );
 }

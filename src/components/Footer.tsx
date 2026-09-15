@@ -43,7 +43,7 @@ export function Footer() {
         </Reveal>
 
         <Reveal delay={200} className="mt-16 md:mt-20">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-line border border-line">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line border border-line">
             <a href={profile.github} target="_blank" rel="noreferrer" className="group bg-bg p-6 transition-colors hover:bg-accent-dim">
               <div className="flex items-center justify-between text-muted group-hover:text-accent transition-colors">
                 <span className="mono text-xs uppercase tracking-[0.2em]">github</span>
@@ -59,6 +59,22 @@ export function Footer() {
               </div>
               <p className="mono mt-4 text-sm break-all">/in/spsc</p>
               <p className="mt-1 text-xs text-muted">{c.linkedinDesc}</p>
+            </a>
+            <a href={profile.resume} target="_blank" rel="noreferrer" className="group bg-bg p-6 transition-colors hover:bg-accent-dim">
+              <div className="flex items-center justify-between text-muted group-hover:text-accent transition-colors">
+                <span className="mono text-xs uppercase tracking-[0.2em]">{c.resume}</span>
+                <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </div>
+              <p className="mono mt-4 text-sm break-all">drive.google.com ↗</p>
+              <p className="mt-1 text-xs text-muted">{c.resumeDesc}</p>
+            </a>
+            <a href={profile.linktree} target="_blank" rel="noreferrer" className="group bg-bg p-6 transition-colors hover:bg-accent-dim">
+              <div className="flex items-center justify-between text-muted group-hover:text-accent transition-colors">
+                <span className="mono text-xs uppercase tracking-[0.2em]">{c.linktreeLabel}</span>
+                <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+              </div>
+              <p className="mono mt-4 text-sm break-all">linktr.ee/brodante</p>
+              <p className="mt-1 text-xs text-muted">{c.linktreeDesc}</p>
             </a>
             <a href={`mailto:${profile.emailResearch}`} className="group bg-bg p-6 transition-colors hover:bg-accent-dim">
               <div className="flex items-center justify-between text-muted group-hover:text-accent transition-colors">

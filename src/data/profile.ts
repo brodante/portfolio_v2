@@ -7,5 +7,7 @@ export const profile = {
   emailResearch: "spsc.mtech@gmail.com",
   github: "https://github.com/brodante",
   linkedin: "https://www.linkedin.com/in/spsc",
+  linktree: "https://linktr.ee/brodante",
+  resume: "https://drive.google.com/file/d/1JcGSSuVgQSbYz4XiJq79kx_mmcsTjt0N/view",
   oldSite: "https://brodante.github.io/portfolio/",
 };

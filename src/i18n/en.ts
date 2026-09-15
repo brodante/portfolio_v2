@@ -185,9 +185,15 @@ export const en: Content = {
     localTime: "local time —",
     bottom: "designed & built with next.js — no templates harmed",
     top: "back to top ↑",
+    resume: "resume",
+    resumeDesc: "the one-page proof",
+    linktreeLabel: "linktree",
+    linktreeDesc: "everything else, one tap",
   },
   caseFile: {
-    all: "← all case files",
+    all: "all case files",
+    back: "back",
+    prev: "previous case file",
     problem: "the problem",
     built: "what i built",
     impact: "impact",
@@ -201,6 +207,7 @@ export const en: Content = {
   indexPage: {
     title1: "Case ",
     title2: "files",
+    backHome: "← home",
     intro:
       "Five builds, five problems worth solving. Every row opens the full case file — the problem, what I built, and the impact it left behind.",
   },
