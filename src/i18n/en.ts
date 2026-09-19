@@ -225,6 +225,8 @@ export const en: Content = {
       links: [
         { label: "github", href: "https://github.com/brodante/KryptBoard-Emulator" },
         { label: "paper", href: "https://doi.org/10.1109/icei65890.2026.11447792" },
+        { label: "live", href: "https://brodante.github.io/KryptBoard/" },
+        { label: "demo", href: "https://brodante.github.io/KryptBoard/demo/demo.html" },
       ],
       problem:
         "TLS only protects data in transit. Before that handshake, your keystrokes sit in the clear on the client — readable by rogue extensions, injected scripts and compromised IMEs. Encryption that starts at transport layer starts too late.",

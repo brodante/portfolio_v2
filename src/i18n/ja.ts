@@ -223,6 +223,8 @@ export const ja: Content = {
       links: [
         { label: "github", href: "https://github.com/brodante/KryptBoard-Emulator" },
         { label: "論文", href: "https://doi.org/10.1109/icei65890.2026.11447792" },
+        { label: "ライブ", href: "https://brodante.github.io/KryptBoard/" },
+        { label: "デモ", href: "https://brodante.github.io/KryptBoard/demo/demo.html" },
       ],
       problem:
         "TLS が守るのは転送中だけ。ハンドシェイクの前、キーストロークはクライアント上で丸見え——悪意ある拡張機能、注入スクリプト、乗っ取られた IME に読まれる。転送層で始める暗号は、遅すぎる。",
